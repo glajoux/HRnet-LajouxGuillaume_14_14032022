@@ -8,6 +8,8 @@ import Modal from "../components/modal/Modal";
 import { useDispatch } from "react-redux";
 import { addEmployee } from "../redux/actions/actionEmployed";
 
+// import Modal from "modal-gl-react-component";
+
 function CreateEmployee(props) {
   const dispatch = useDispatch();
 
@@ -28,10 +30,12 @@ function CreateEmployee(props) {
   const [state, setState] = useState("AL");
   const [zipCode, setZipCode] = useState();
   const [department, setDepartment] = useState("Sales");
+  const [id, setId] = useState(1);
 
   const [modal, setModal] = useState(false);
 
   const employeeToSaved = {
+    id,
     firstName,
     lastName,
     birthDate,
@@ -60,9 +64,22 @@ function CreateEmployee(props) {
   };
 
   const submitFormulaire = () => {
-    dispatch(addEmployee(employeeToSaved));
+    console.log(employeeToSaved.birthDate);
+    const employeToStore = {
+      ...employeeToSaved,
+      birthDate: birthDate
+        ? `${birthDate.getDate()}/${birthDate.getMonth()}/${birthDate.getFullYear()}`
+        : "",
+      startDate: startDate
+        ? `${startDate.getDate()}/${startDate.getMonth()}/${startDate.getFullYear()}`
+        : "",
+    };
+    dispatch(addEmployee(employeToStore));
+    setId(id + 1);
     setModal(!modal);
     resetFormulaire();
+    setStartDate("");
+    setBirthDate("");
   };
 
   return (
