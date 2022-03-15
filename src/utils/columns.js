@@ -1,47 +1,38 @@
 export const columns = [
   {
     name: "First Name",
-    selector: "firstName",
-    sortable: true,
+    id: "firstName",
   },
   {
     name: "Last Name",
-    selector: "lastName",
-    sortable: true,
+    id: "lastName",
   },
   {
     name: "Start Date",
-    selector: "startDate",
-    sortable: true,
+    id: "startDate",
   },
   {
     name: "Department",
-    selector: "department",
-    sortable: true,
+    id: "department",
   },
   {
     name: "Date of Birth",
-    selector: "dateOfBirth",
-    sortable: true,
+    id: "dateOfBirth",
   },
   {
     name: "Street",
-    selector: "street",
-    sortable: true,
+    id: "street",
   },
   {
     name: "City",
-    selector: "city",
-    sortable: true,
+    id: "city",
   },
   {
     name: "State",
-    selector: "state",
-    sortable: true,
+    id: "state",
   },
   {
     name: "Zip Code",
-    selector: "zipCode",
-    sortable: true,
+    id: "zipCode",
   },
 ];

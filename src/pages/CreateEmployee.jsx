@@ -7,8 +7,7 @@ import Select from "../components/Select";
 import Modal from "../components/modal/Modal";
 import { useDispatch } from "react-redux";
 import { addEmployee } from "../redux/actions/actionEmployed";
-
-// import Modal from "modal-gl-react-component";
+import { v4 as uuidv4 } from "uuid";
 
 function CreateEmployee(props) {
   const dispatch = useDispatch();
@@ -23,14 +22,14 @@ function CreateEmployee(props) {
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [birthDate, setBirthDate] = useState("");
+  const [dateOfBirth, setBirthDate] = useState("");
   const [startDate, setStartDate] = useState("");
   const [street, setStreet] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("AL");
   const [zipCode, setZipCode] = useState();
   const [department, setDepartment] = useState("Sales");
-  const [id, setId] = useState(1);
+  const [id, setId] = useState(uuidv4());
 
   const [modal, setModal] = useState(false);
 
@@ -38,7 +37,7 @@ function CreateEmployee(props) {
     id,
     firstName,
     lastName,
-    birthDate,
+    dateOfBirth,
     startDate,
     street,
     city,
@@ -67,15 +66,15 @@ function CreateEmployee(props) {
     console.log(employeeToSaved.birthDate);
     const employeToStore = {
       ...employeeToSaved,
-      birthDate: birthDate
-        ? `${birthDate.getDate()}/${birthDate.getMonth()}/${birthDate.getFullYear()}`
+      dateOfBirth: dateOfBirth
+        ? `${dateOfBirth.getDate()}/${dateOfBirth.getMonth()}/${dateOfBirth.getFullYear()}`
         : "",
       startDate: startDate
         ? `${startDate.getDate()}/${startDate.getMonth()}/${startDate.getFullYear()}`
         : "",
     };
     dispatch(addEmployee(employeToStore));
-    setId(id + 1);
+    setId(uuidv4());
     setModal(!modal);
     resetFormulaire();
     setStartDate("");
@@ -109,7 +108,7 @@ function CreateEmployee(props) {
 
           <label htmlFor="date-of-birth">Date of birth</label>
           <DatePicker
-            selected={birthDate}
+            selected={dateOfBirth}
             onChange={(date) => setBirthDate(date)}
             id="date-of-birth"
             peekNextMonth
