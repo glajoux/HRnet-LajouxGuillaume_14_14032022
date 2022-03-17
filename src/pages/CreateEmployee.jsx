@@ -4,10 +4,11 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import states from "../data/states";
 import Select from "../components/Select";
-import Modal from "../components/modal/Modal";
+// import Modal from "../components/modal/Modal";
 import { useDispatch } from "react-redux";
 import { addEmployee } from "../redux/actions/actionEmployed";
 import { v4 as uuidv4 } from "uuid";
+import { Modal } from "modal-gl-component/dist/index";
 
 function CreateEmployee(props) {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ function CreateEmployee(props) {
   const [zipCode, setZipCode] = useState();
   const [department, setDepartment] = useState("Sales");
   const [id, setId] = useState(uuidv4());
+  const [errorForumlaire, setErrorFormulaire] = useState(true);
 
   const [modal, setModal] = useState(false);
 
@@ -63,7 +65,7 @@ function CreateEmployee(props) {
   };
 
   const submitFormulaire = () => {
-    console.log(employeeToSaved.birthDate);
+    console.log(errorForumlaire);
     const employeToStore = {
       ...employeeToSaved,
       dateOfBirth: dateOfBirth
@@ -73,12 +75,28 @@ function CreateEmployee(props) {
         ? `${startDate.getDate()}/${startDate.getMonth()}/${startDate.getFullYear()}`
         : "",
     };
-    dispatch(addEmployee(employeToStore));
-    setId(uuidv4());
-    setModal(!modal);
-    resetFormulaire();
-    setStartDate("");
-    setBirthDate("");
+    if (
+      firstName === "" ||
+      lastName === "" ||
+      dateOfBirth === "" ||
+      startDate === "" ||
+      street === "" ||
+      city === "" ||
+      state === "" ||
+      zipCode === "" ||
+      department === ""
+    ) {
+      setErrorFormulaire(true);
+      setModal(!modal);
+    } else {
+      setErrorFormulaire(false);
+      dispatch(addEmployee(employeToStore));
+      setId(uuidv4());
+      setModal(!modal);
+      resetFormulaire();
+      setStartDate("");
+      setBirthDate("");
+    }
   };
 
   return (
@@ -173,7 +191,11 @@ function CreateEmployee(props) {
         <button onClick={submitFormulaire}>Save</button>
       </div>
       <Modal state={modal} close={closeModal}>
-        <p>Employee Created!</p>
+        {errorForumlaire ? (
+          <p>Merci de remplir tout les champs</p>
+        ) : (
+          <p>Employee Created!</p>
+        )}
       </Modal>
     </div>
   );

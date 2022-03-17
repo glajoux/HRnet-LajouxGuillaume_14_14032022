@@ -39,3 +39,12 @@ option {
 button {
   margin-top: 1.5rem;
 }
+
+tr:nth-child(even) {
+  background-color: #ddd;
+}
+
+tbody {
+  border-bottom: 2px solid black;
+  border-top: 2px solid black;
+}
