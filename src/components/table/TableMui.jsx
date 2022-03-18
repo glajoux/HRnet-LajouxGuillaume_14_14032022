@@ -34,9 +34,9 @@ function TableMui() {
             (word) =>
               word.firstName.toLowerCase().includes(target.value) ||
               word.lastName.toLowerCase().includes(target.value) ||
-              word.startDate.includes(target.value) ||
+              word.startDate.toString().includes(target.value) ||
               word.department.toLowerCase().includes(target.value) ||
-              word.dateOfBirth.includes(target.value) ||
+              word.dateOfBirth.toString().includes(target.value) ||
               word.street.toLowerCase().includes(target.value) ||
               word.city.toLowerCase().includes(target.value) ||
               word.state.toLowerCase().includes(target.value) ||

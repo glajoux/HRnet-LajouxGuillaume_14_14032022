@@ -9,6 +9,11 @@ import { addEmployee } from "../redux/actions/actionEmployed";
 import { v4 as uuidv4 } from "uuid";
 import { Modal } from "modal-gl-component/dist/index";
 
+/**
+ * It creates a form to create an employee.
+ * @returns The return is a div with a form and a button. The form is used to create a new employee.
+ * The button is used to submit the form.
+ */
 function CreateEmployee(props) {
   const dispatch = useDispatch();
 
@@ -27,7 +32,7 @@ function CreateEmployee(props) {
   const [street, setStreet] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("AL");
-  const [zipCode, setZipCode] = useState();
+  const [zipCode, setZipCode] = useState("");
   const [department, setDepartment] = useState("Sales");
   const [id, setId] = useState(uuidv4());
   const [errorForumlaire, setErrorFormulaire] = useState(true);
@@ -47,18 +52,30 @@ function CreateEmployee(props) {
     department,
   };
 
+  /**
+   * It sets the department value to the value of the target.
+   */
   const handleChangeDepartment = (e) => {
     setDepartment(e.target.value);
   };
 
+  /**
+   * It sets the state of the component to the value of the input.
+   */
   const handleChangeState = (e) => {
     setState(e.target.value);
   };
 
+  /**
+   * *This function is used to toggle the modal on and off.*
+   */
   const closeModal = () => {
     setModal(!modal);
   };
 
+  /**
+   * Reset the form by removing all the values from the input fields
+   */
   const resetFormulaire = () => {
     document.getElementById("create-employee").reset();
   };
