@@ -4,7 +4,6 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import states from "../data/states";
 import Select from "../components/Select";
-// import Modal from "../components/modal/Modal";
 import { useDispatch } from "react-redux";
 import { addEmployee } from "../redux/actions/actionEmployed";
 import { v4 as uuidv4 } from "uuid";
@@ -65,38 +64,46 @@ function CreateEmployee(props) {
   };
 
   const submitFormulaire = () => {
-    console.log(errorForumlaire);
-    const employeToStore = {
-      ...employeeToSaved,
-      dateOfBirth: dateOfBirth
-        ? `${dateOfBirth.getDate()}/${dateOfBirth.getMonth()}/${dateOfBirth.getFullYear()}`
-        : "",
-      startDate: startDate
-        ? `${startDate.getDate()}/${startDate.getMonth()}/${startDate.getFullYear()}`
-        : "",
-    };
-    if (
-      firstName === "" ||
-      lastName === "" ||
-      dateOfBirth === "" ||
-      startDate === "" ||
-      street === "" ||
-      city === "" ||
-      state === "" ||
-      zipCode === "" ||
-      department === ""
-    ) {
-      setErrorFormulaire(true);
-      setModal(!modal);
-    } else {
-      setErrorFormulaire(false);
-      dispatch(addEmployee(employeToStore));
-      setId(uuidv4());
-      setModal(!modal);
-      resetFormulaire();
-      setStartDate("");
-      setBirthDate("");
-    }
+    let test = Date.parse(employeeToSaved.dateOfBirth);
+    console.log(test);
+    // const employeToStore = {
+    //   ...employeeToSaved,
+    //   dateOfBirth: dateOfBirth
+    //     ? `${dateOfBirth.getDate()}/${dateOfBirth.getMonth()}/${dateOfBirth.getFullYear()}`
+    //     : "",
+    //   startDate: startDate
+    //     ? `${startDate.getDate()}/${startDate.getMonth()}/${startDate.getFullYear()}`
+    //     : "",
+    // };
+    // const employeToStore = {
+    //   ...employeeToSaved,
+    //   dateOfBirth: dateOfBirth ? Date.parse(dateOfBirth) : "",
+    //   startDate: startDate
+    //     ? `${startDate.getDate()}/${startDate.getMonth()}/${startDate.getFullYear()}`
+    //     : "",
+    // };
+    // if (
+    //   firstName === "" ||
+    //   lastName === "" ||
+    //   dateOfBirth === "" ||
+    //   startDate === "" ||
+    //   street === "" ||
+    //   city === "" ||
+    //   state === "" ||
+    //   zipCode === "" ||
+    //   department === ""
+    // ) {
+    //   setErrorFormulaire(true);
+    //   setModal(!modal);
+    // } else {
+    setErrorFormulaire(false);
+    dispatch(addEmployee(employeeToSaved));
+    setId(uuidv4());
+    setModal(!modal);
+    resetFormulaire();
+    setStartDate("");
+    setBirthDate("");
+    // }
   };
 
   return (
@@ -106,7 +113,9 @@ function CreateEmployee(props) {
         <NavLink to="/liste">View Current Employees</NavLink>
         <h2>Create Employee</h2>
         <form action="#" id="create-employee">
-          <label htmlFor="first-name">First Name</label>
+          <label className="label" htmlFor="first-name">
+            First Name
+          </label>
           <input
             type="text"
             id="first-name"
@@ -115,7 +124,9 @@ function CreateEmployee(props) {
             }}
           />
 
-          <label htmlFor="last-name">Last Name</label>
+          <label className="label" htmlFor="last-name">
+            Last Name
+          </label>
           <input
             type="text"
             id="last-name"
@@ -124,7 +135,9 @@ function CreateEmployee(props) {
             }}
           />
 
-          <label htmlFor="date-of-birth">Date of birth</label>
+          <label className="label" htmlFor="date-of-birth">
+            Date of birth
+          </label>
           <DatePicker
             selected={dateOfBirth}
             onChange={(date) => setBirthDate(date)}
@@ -135,7 +148,9 @@ function CreateEmployee(props) {
             dropdownMode="select"
           />
 
-          <label htmlFor="start-date">Start date</label>
+          <label className="label" htmlFor="start-date">
+            Start date
+          </label>
           <DatePicker
             selected={startDate}
             onChange={(date) => setStartDate(date)}
@@ -148,7 +163,9 @@ function CreateEmployee(props) {
 
           <fieldset className="adress">
             <legend>Adress</legend>
-            <label htmlFor="street">Street</label>
+            <label className="label" htmlFor="street">
+              Street
+            </label>
             <input
               id="street"
               type="text"
@@ -157,7 +174,9 @@ function CreateEmployee(props) {
               }}
             />
 
-            <label htmlFor="city">City</label>
+            <label className="label" htmlFor="city">
+              City
+            </label>
             <input
               id="city"
               type="text"
@@ -172,7 +191,9 @@ function CreateEmployee(props) {
               change={(e) => handleChangeState(e)}
             />
 
-            <label htmlFor="zip-code">Zip Code</label>
+            <label className="label" htmlFor="zip-code">
+              Zip Code
+            </label>
             <input
               id="zip-code"
               type="number"

@@ -25,7 +25,9 @@ function Select({ label, datas, change }) {
   };
   return (
     <>
-      <label htmlFor={label}>{capitalizedFirstLetter(label)}</label>
+      <label className="label" htmlFor={label}>
+        {capitalizedFirstLetter(label)}
+      </label>
       <select name={label} id={label} className="main-select" onChange={change}>
         {displayOption()}
       </select>

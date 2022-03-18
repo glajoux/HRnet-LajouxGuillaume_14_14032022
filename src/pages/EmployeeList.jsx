@@ -4,7 +4,7 @@ import TableMui from "../components/table/TableMui";
 
 function EmployeeList(props) {
   return (
-    <div className="container">
+    <div className="table-container">
       <h1>Current Employees</h1>
       <TableMui />
       <NavLink to="/">Home</NavLink>

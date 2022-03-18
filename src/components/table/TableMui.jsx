@@ -10,6 +10,7 @@ import { columns } from "../../utils/columns";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { selectEmployee } from "../../redux/selectors/selectors";
+import { format } from "date-fns";
 
 function TableMui() {
   const dataState = useSelector(selectEmployee);
@@ -63,9 +64,17 @@ function TableMui() {
             <TableRow key={employee.id}>
               <TableCell>{employee.firstName}</TableCell>
               <TableCell>{employee.lastName}</TableCell>
-              <TableCell>{employee.startDate}</TableCell>
+              <TableCell>
+                {employee.startDate
+                  ? format(new Date(employee.startDate), "dd/MM/yyy")
+                  : ""}
+              </TableCell>
               <TableCell>{employee.department}</TableCell>
-              <TableCell>{employee.dateOfBirth}</TableCell>
+              <TableCell>
+                {employee.dateOfBirth
+                  ? format(new Date(employee.dateOfBirth), "dd/MM/yyy")
+                  : ""}
+              </TableCell>
               <TableCell>{employee.street}</TableCell>
               <TableCell>{employee.city}</TableCell>
               <TableCell>{employee.state}</TableCell>
