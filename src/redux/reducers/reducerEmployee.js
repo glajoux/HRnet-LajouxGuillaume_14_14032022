@@ -12,6 +12,12 @@ const initialState = {
   error: null,
 };
 
+/**
+ * A reducer function that handles the state of the employee.
+ * @param [state] - The current state of the reducer.
+ * @param action - The action that is being dispatched.
+ * @returns The reducer is returning the state.
+ */
 const reducerEmployee = (state = initialState, action) => {
   return produce(state, (draft) => {
     switch (action.type) {

@@ -80,39 +80,16 @@ function CreateEmployee(props) {
     document.getElementById("create-employee").reset();
   };
 
+  /**
+   * * Set the errorFormulaire to false.
+   * * Dispatch the addEmployee action to the store.
+   * * Set the id to a new uuid.
+   * * Set the modal to false.
+   * * Reset the form.
+   * * Set the startDate to an empty string.
+   * * Set the birthDate to an empty string.
+   */
   const submitFormulaire = () => {
-    let test = Date.parse(employeeToSaved.dateOfBirth);
-    console.log(test);
-    // const employeToStore = {
-    //   ...employeeToSaved,
-    //   dateOfBirth: dateOfBirth
-    //     ? `${dateOfBirth.getDate()}/${dateOfBirth.getMonth()}/${dateOfBirth.getFullYear()}`
-    //     : "",
-    //   startDate: startDate
-    //     ? `${startDate.getDate()}/${startDate.getMonth()}/${startDate.getFullYear()}`
-    //     : "",
-    // };
-    // const employeToStore = {
-    //   ...employeeToSaved,
-    //   dateOfBirth: dateOfBirth ? Date.parse(dateOfBirth) : "",
-    //   startDate: startDate
-    //     ? `${startDate.getDate()}/${startDate.getMonth()}/${startDate.getFullYear()}`
-    //     : "",
-    // };
-    // if (
-    //   firstName === "" ||
-    //   lastName === "" ||
-    //   dateOfBirth === "" ||
-    //   startDate === "" ||
-    //   street === "" ||
-    //   city === "" ||
-    //   state === "" ||
-    //   zipCode === "" ||
-    //   department === ""
-    // ) {
-    //   setErrorFormulaire(true);
-    //   setModal(!modal);
-    // } else {
     setErrorFormulaire(false);
     dispatch(addEmployee(employeeToSaved));
     setId(uuidv4());
@@ -120,7 +97,6 @@ function CreateEmployee(props) {
     resetFormulaire();
     setStartDate("");
     setBirthDate("");
-    // }
   };
 
   return (
