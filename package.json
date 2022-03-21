@@ -1,6 +1,12 @@
 {
   "name": "hrnet",
   "version": "0.1.0",
+  "description": "application hrnet that manage employees",
+  "author": "guillaume lajoux",
+  "keywords": [
+    "manage",
+    "employe"
+  ],
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.8.2",
@@ -14,7 +20,6 @@
     "immer": "^9.0.12",
     "lighthouse": "^9.5.0",
     "modal-gl-component": "^0.1.0",
-    "modal-gl-react-component": "^1.0.0",
     "react": "^17.0.2",
     "react-datepicker": "^4.7.0",
     "react-dom": "^17.0.2",

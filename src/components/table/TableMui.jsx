@@ -1,3 +1,4 @@
+import React, { Suspence } from "react";
 import {
   TableBody,
   TableCell,

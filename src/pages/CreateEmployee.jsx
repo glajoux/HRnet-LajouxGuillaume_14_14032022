@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import { NavLink } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import states from "../data/states";
-import Select from "../components/Select";
+// import Select from "../components/Select";
 import { useDispatch } from "react-redux";
 import { addEmployee } from "../redux/actions/actionEmployed";
 import { v4 as uuidv4 } from "uuid";
 import { Modal } from "modal-gl-component/dist/index";
+
+const Select = React.lazy(() => import("../components/Select"));
 
 /**
  * It creates a form to create an employee.
@@ -101,116 +103,118 @@ function CreateEmployee(props) {
 
   return (
     <div>
-      <h1 className="title">HRnet</h1>
-      <div className="main-container">
-        <NavLink to="/liste">View Current Employees</NavLink>
-        <h2>Create Employee</h2>
-        <form action="#" id="create-employee">
-          <label className="label" htmlFor="first-name">
-            First Name
-          </label>
-          <input
-            type="text"
-            id="first-name"
-            onChange={(e) => {
-              setFirstName(e.target.value);
-            }}
-          />
-
-          <label className="label" htmlFor="last-name">
-            Last Name
-          </label>
-          <input
-            type="text"
-            id="last-name"
-            onChange={(e) => {
-              setLastName(e.target.value);
-            }}
-          />
-
-          <label className="label" htmlFor="date-of-birth">
-            Date of birth
-          </label>
-          <DatePicker
-            selected={dateOfBirth}
-            onChange={(date) => setBirthDate(date)}
-            id="date-of-birth"
-            peekNextMonth
-            showMonthDropdown
-            showYearDropdown
-            dropdownMode="select"
-          />
-
-          <label className="label" htmlFor="start-date">
-            Start date
-          </label>
-          <DatePicker
-            selected={startDate}
-            onChange={(date) => setStartDate(date)}
-            id="start-date"
-            peekNextMonth
-            showMonthDropdown
-            showYearDropdown
-            dropdownMode="select"
-          />
-
-          <fieldset className="adress">
-            <legend>Adress</legend>
-            <label className="label" htmlFor="street">
-              Street
+      <Suspense fallback={<div>Chargement...</div>}>
+        <h1 className="title">HRnet</h1>
+        <div className="main-container">
+          <NavLink to="/liste">View Current Employees</NavLink>
+          <h2>Create Employee</h2>
+          <form action="#" id="create-employee">
+            <label className="label" htmlFor="first-name">
+              First Name
             </label>
             <input
-              id="street"
               type="text"
+              id="first-name"
               onChange={(e) => {
-                setStreet(e.target.value);
+                setFirstName(e.target.value);
               }}
             />
 
-            <label className="label" htmlFor="city">
-              City
+            <label className="label" htmlFor="last-name">
+              Last Name
             </label>
             <input
-              id="city"
               type="text"
+              id="last-name"
               onChange={(e) => {
-                setCity(e.target.value);
+                setLastName(e.target.value);
               }}
             />
+
+            <label className="label" htmlFor="date-of-birth">
+              Date of birth
+            </label>
+            <DatePicker
+              selected={dateOfBirth}
+              onChange={(date) => setBirthDate(date)}
+              id="date-of-birth"
+              peekNextMonth
+              showMonthDropdown
+              showYearDropdown
+              dropdownMode="select"
+            />
+
+            <label className="label" htmlFor="start-date">
+              Start date
+            </label>
+            <DatePicker
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
+              id="start-date"
+              peekNextMonth
+              showMonthDropdown
+              showYearDropdown
+              dropdownMode="select"
+            />
+
+            <fieldset className="adress">
+              <legend>Adress</legend>
+              <label className="label" htmlFor="street">
+                Street
+              </label>
+              <input
+                id="street"
+                type="text"
+                onChange={(e) => {
+                  setStreet(e.target.value);
+                }}
+              />
+
+              <label className="label" htmlFor="city">
+                City
+              </label>
+              <input
+                id="city"
+                type="text"
+                onChange={(e) => {
+                  setCity(e.target.value);
+                }}
+              />
+
+              <Select
+                label="state"
+                datas={states}
+                change={(e) => handleChangeState(e)}
+              />
+
+              <label className="label" htmlFor="zip-code">
+                Zip Code
+              </label>
+              <input
+                id="zip-code"
+                type="number"
+                onChange={(e) => {
+                  setZipCode(e.target.value);
+                }}
+              />
+            </fieldset>
 
             <Select
-              label="state"
-              datas={states}
-              change={(e) => handleChangeState(e)}
+              label="department"
+              datas={departments}
+              change={(e) => handleChangeDepartment(e)}
             />
-
-            <label className="label" htmlFor="zip-code">
-              Zip Code
-            </label>
-            <input
-              id="zip-code"
-              type="number"
-              onChange={(e) => {
-                setZipCode(e.target.value);
-              }}
-            />
-          </fieldset>
-
-          <Select
-            label="department"
-            datas={departments}
-            change={(e) => handleChangeDepartment(e)}
-          />
-        </form>
-        <button onClick={submitFormulaire}>Save</button>
-      </div>
-      <Modal state={modal} close={closeModal}>
-        {errorForumlaire ? (
-          <p>Merci de remplir tout les champs</p>
-        ) : (
-          <p>Employee Created!</p>
-        )}
-      </Modal>
+          </form>
+          <button onClick={submitFormulaire}>Save</button>
+        </div>
+        <Modal state={modal} close={closeModal}>
+          {errorForumlaire ? (
+            <p>Merci de remplir tout les champs</p>
+          ) : (
+            <p>Employee Created!</p>
+          )}
+        </Modal>
+      </Suspense>
     </div>
   );
 }
