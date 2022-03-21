@@ -1,4 +1,4 @@
-import React, { Suspence } from "react";
+import React from "react";
 import {
   TableBody,
   TableCell,
